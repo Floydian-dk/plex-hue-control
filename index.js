@@ -73,9 +73,9 @@ app.post('/', upload.single('thumb'), function (req, res, next) {
     res.sendStatus(200);
 });
 
-app.listen(listen_port); // listen on port 8000
+app.listen(listen_port); // listen on configured port
 setInterval(() => {
-    getGroupAnyOn(2).then(data => {
+    getGroupAnyOn(huescenegroupid).then(data => {
         lightson = data;
         console.log("checking lights on " + data);
     });
