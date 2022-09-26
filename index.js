@@ -33,7 +33,7 @@ function setScene(groupId, scene, transitionTime) {
     };
     request(options, function (error, response, body) {
         if (!error && response.statusCode == 200) {
-            console.log(body.id)
+            //console.log(body.id)
         }
     });
 }
@@ -45,27 +45,27 @@ function getGroupAnyOn(groupId) {
 
 app.post('/', upload.single('thumb'), function (req, res, next) {
     var payload = JSON.parse(req.body.payload);
-    console.log('Got webhook for', payload.event);
-    console.log(payload.Player.uuid)
-    console.log(payload.Metadata.type);
+    //console.log('Got webhook for: ', payload.event);
+    console.log('Got player ID: ', payload.Player.uuid)
+    //console.log('Got payload type: ', payload.Metadata.type);
     
-    if ((payload.Player.uuid == playerID1 || payload.Player.uuid == playerID2) && payload.Metadata.type == 'movie' && lightson == true) {
+    if ((payload.Player.uuid == playerID1 || payload.Player.uuid == playerID2) && (payload.Metadata.type == 'movie' || payload.Metadata.type == 'episode') && lightson == true) {
         console.log(payload.event);
         switch (payload.event) {
             case 'media.play':
-                setScene(huescenegroupid, huesceneplay, 80);
+                setScene(huescenegroupid, huesceneplay, 250); // Delay in 1/10s
                 console.log("Play event");
                 break;
             case 'media.pause':
-                setTimeout(setScene, 1000, huescenegroupid, huescenepause, 10);
+                setTimeout(setScene, 1000, huescenegroupid, huescenepause, 50); // Delay in 1/10s
                 console.log("pause event");
                 break;
             case 'media.resume':
-                setScene(huescenegroupid, huesceneplay, 5);
+                setScene(huescenegroupid, huesceneplay, 30); // Delay in 1/10s
                 console.log("media resume");
                 break;
             case 'media.stop':
-                setScene(huescenegroupid, huescenestop, 100)
+                setScene(huescenegroupid, huescenestop, 100) // Delay in 1/10s
                 console.log("media stop");
                 break;
         }
@@ -77,7 +77,7 @@ app.listen(listen_port); // listen on configured port
 setInterval(() => {
     getGroupAnyOn(huescenegroupid).then(data => {
         lightson = data;
-        console.log("checking lights on " + data);
+        //console.log("checking lights on " + data);
     });
 }
-    , 30000);
+    , 30000); // Checking status every 30 seconds

@@ -1,1 +1,1 @@
-# plex-hue-control
+# Plex HUE Control
