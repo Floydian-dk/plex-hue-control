@@ -4,7 +4,9 @@ Project inspired by the work done by [Nathan Paul] here (https://npaul.uk/2020/0
 
 Instead of having hardcoded parameters, his code has been ammended to use .env variables, making it easier to change parameters.
 
-* v1.1: Implementing using sunset/sunrise to control the lights.
+## Version History
+* v1.0.0: Initial implementation of control.
+* v1.1.0: Implementing use of sunset/sunrise to determine when to control the lights.
 
 ## Deployment
 
