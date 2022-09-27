@@ -7,6 +7,7 @@ Instead of having hardcoded parameters, his code has been ammended to use .env v
 ## Version History
 * v1.0.0: Initial implementation of control.
 * v1.1.0: Implementing use of sunset/sunrise to determine when to control the lights.
+* v1.1.1: Fixing missing packages
 
 ## Deployment
 
