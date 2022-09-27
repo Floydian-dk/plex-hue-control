@@ -1,6 +1,6 @@
 {
   "name": "Plex HUE Control",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Allowing you to control HUE when playing movies/TV-Shows in Plex",
   "main": "index.js",
   "scripts": {

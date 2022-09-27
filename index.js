@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+const NightTimeCalc = require('./sun-calc')
+
 // requried libraries
 const express = require('express')
     , request = require('request')
@@ -18,8 +20,12 @@ const huesceneplay = process.env.HUE_SCENE_PLAY; // Same scene used for play & r
 const huescenepause = process.env.HUE_SCENE_PAUSE;
 const huescenestop = process.env.HUE_SCENE_STOP;
 const huescenegroupid = process.env.HUE_SCENE_GROUPID;
+const latitude = process.env.HOME_LATITUDE || 0.0;
+const longitude = process.env.HOME_LONGITUDE || 0.0;
 
 // Require lights to be on. If turned off, we will not be changing scene.
+// If Latitude & Longitude are configured in .env we will control lights during 
+// nighttime (after sunset & before sunrise)
 var lightson = true;
 
 // Set the scene based on id
@@ -37,6 +43,7 @@ function setScene(groupId, scene, transitionTime) {
         }
     });
 }
+
 
 function getGroupAnyOn(groupId) {
     return axios.get('http://' + hueaddress + '/api/' + huetoken + '/groups/' + groupId + '/')
@@ -75,9 +82,21 @@ app.post('/', upload.single('thumb'), function (req, res, next) {
 
 app.listen(listen_port); // listen on configured port
 setInterval(() => {
-    getGroupAnyOn(huescenegroupid).then(data => {
-        lightson = data;
-        //console.log("checking lights on " + data);
-    });
+    if (latitude != 0.0 && longitude != 0.0 ) {
+        if (NightTimeCalc(latitude, longitude) == 1) {
+            lightson = true;
+        }
+        else {
+            lightson = false;
+        }
+    }
+    else
+    {
+        getGroupAnyOn(huescenegroupid).then(data => {
+            lightson = data;
+            //console.log("checking lights on " + data);
+
+        });
+    }
 }
     , 30000); // Checking status every 30 seconds

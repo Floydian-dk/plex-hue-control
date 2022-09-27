@@ -4,6 +4,7 @@ Project inspired by the work done by [Nathan Paul] here (https://npaul.uk/2020/0
 
 Instead of having hardcoded parameters, his code has been ammended to use .env variables, making it easier to change parameters.
 
+* v1.1: Implementing using sunset/sunrise to control the lights.
 
 ## Deployment
 
@@ -103,6 +104,14 @@ Transition times between scenes are currently hardcoded.
 This is the Plex PlayerID(s) that should activate your lights.
 Currently only two players are supported.
 To get this/these ID's you need to monitor the log output. See below.
+
+* `HOME_LATITUDE=`
+Latitide of your home location - used to calculate sunset and sunrise.
+If left empty, lights will only be controlled if they are turned on when you start watching a Move/TV-Show.
+
+* `HOME_LONGITUDE=`
+Longitude of your home location - used to calculate sunset and sunrise.
+If left empty, lights will only be controlled if they are turned on when you start watching a Move/TV-Show.
 
 
 ### Build the app
