@@ -8,6 +8,8 @@ Instead of having hardcoded parameters, his code has been ammended to use .env v
 * v1.0.0: Initial implementation of control.
 * v1.1.0: Implementing use of sunset/sunrise to determine when to control the lights.
 * v1.1.1: Fixing missing packages
+* v1.2.0: Adding setting for trailershow before movies.
+* v1.2.2: More details in logging
 
 ## Deployment
 

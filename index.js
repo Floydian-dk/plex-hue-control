@@ -64,38 +64,38 @@ app.post('/', upload.single('thumb'), function (req, res, next) {
             switch (payload.event) {
                 case 'media.play':
                     setScene(huescenegroupid, huescenetrailer, 250); // Delay in 1/10s
-                    console.log("Play event");
+                    console.log("play trailer or clip event");
                     break;
                 case 'media.pause':
                     setTimeout(setScene, 1000, huescenegroupid, huescenepause, 50); // Delay in 1/10s
-                    console.log("pause event");
+                    console.log("pause trailer or clip event");
                     break;
                 case 'media.resume':
                     setScene(huescenegroupid, huesceneplay, 30); // Delay in 1/10s
-                    console.log("media resume");
+                    console.log("media trailer or clip resume");
                     break;
                 case 'media.stop':
                     setScene(huescenegroupid, huescenestop, 100) // Delay in 1/10s
-                    console.log("media stop");
+                    console.log("media trailer or clip stop");
                     break;
             }
         default: // We have movie or episode
             switch (payload.event) {
                 case 'media.play':
                     setScene(huescenegroupid, huesceneplay, 250); // Delay in 1/10s
-                    console.log("Play event");
+                    console.log("play movie or episode event");
                     break;
                 case 'media.pause':
                     setTimeout(setScene, 1000, huescenegroupid, huescenepause, 50); // Delay in 1/10s
-                    console.log("pause event");
+                    console.log("pause movie or episode event");
                     break;
                 case 'media.resume':
                     setScene(huescenegroupid, huesceneplay, 30); // Delay in 1/10s
-                    console.log("media resume");
+                    console.log("media movie or episode resume");
                     break;
                 case 'media.stop':
                     setScene(huescenegroupid, huescenestop, 100) // Delay in 1/10s
-                    console.log("media stop");
+                    console.log("media movie or episode stop");
                     break;
             }
         }
