@@ -19,6 +19,7 @@ const playerID2 =  process.env.PLAYER_ID2;
 const huesceneplay = process.env.HUE_SCENE_PLAY; // Same scene used for play & resume
 const huescenepause = process.env.HUE_SCENE_PAUSE;
 const huescenestop = process.env.HUE_SCENE_STOP;
+const huescenetrailer = process.env.HUE_SCENE_TRAILER;
 const huescenegroupid = process.env.HUE_SCENE_GROUPID;
 const latitude = process.env.HOME_LATITUDE || 0.0;
 const longitude = process.env.HOME_LONGITUDE || 0.0;
@@ -56,25 +57,47 @@ app.post('/', upload.single('thumb'), function (req, res, next) {
     console.log('Got player ID: ', payload.Player.uuid)
     //console.log('Got payload type: ', payload.Metadata.type);
     
-    if ((payload.Player.uuid == playerID1 || payload.Player.uuid == playerID2) && (payload.Metadata.type == 'movie' || payload.Metadata.type == 'episode') && lightson == true) {
+    if ((payload.Player.uuid == playerID1 || payload.Player.uuid == playerID2) && (payload.Metadata.type == 'movie' || payload.Metadata.type == 'clip' || payload.Metadata.type == 'episode') && lightson == true) {
         console.log(payload.event);
-        switch (payload.event) {
-            case 'media.play':
-                setScene(huescenegroupid, huesceneplay, 250); // Delay in 1/10s
-                console.log("Play event");
-                break;
-            case 'media.pause':
-                setTimeout(setScene, 1000, huescenegroupid, huescenepause, 50); // Delay in 1/10s
-                console.log("pause event");
-                break;
-            case 'media.resume':
-                setScene(huescenegroupid, huesceneplay, 30); // Delay in 1/10s
-                console.log("media resume");
-                break;
-            case 'media.stop':
-                setScene(huescenegroupid, huescenestop, 100) // Delay in 1/10s
-                console.log("media stop");
-                break;
+        switch (payload.Metadata.type) {
+        case 'clip': // We have a trailer
+            switch (payload.event) {
+                case 'media.play':
+                    setScene(huescenegroupid, huescenetrailer, 250); // Delay in 1/10s
+                    console.log("Play event");
+                    break;
+                case 'media.pause':
+                    setTimeout(setScene, 1000, huescenegroupid, huescenepause, 50); // Delay in 1/10s
+                    console.log("pause event");
+                    break;
+                case 'media.resume':
+                    setScene(huescenegroupid, huesceneplay, 30); // Delay in 1/10s
+                    console.log("media resume");
+                    break;
+                case 'media.stop':
+                    setScene(huescenegroupid, huescenestop, 100) // Delay in 1/10s
+                    console.log("media stop");
+                    break;
+            }
+        else: // We have movie or episode
+            switch (payload.event) {
+                case 'media.play':
+                    setScene(huescenegroupid, huesceneplay 250); // Delay in 1/10s
+                    console.log("Play event");
+                    break;
+                case 'media.pause':
+                    setTimeout(setScene, 1000, huescenegroupid, huescenepause, 50); // Delay in 1/10s
+                    console.log("pause event");
+                    break;
+                case 'media.resume':
+                    setScene(huescenegroupid, huesceneplay, 30); // Delay in 1/10s
+                    console.log("media resume");
+                    break;
+                case 'media.stop':
+                    setScene(huescenegroupid, huescenestop, 100) // Delay in 1/10s
+                    console.log("media stop");
+                    break;
+            }
         }
     }
     res.sendStatus(200);

@@ -96,6 +96,9 @@ This is the ID of the HUE lighting scene that should be started when you pause p
 * `HUE_SCENE_STOP`
 This is the ID of the HUE lighting scene that should be started when your movie/TV-Show finishes.
 
+* `HUE_SCENE_TRAILER`
+This is the ID of the HUE lighting scene that should be started when the trailer show is starting, or you are watching clips.
+
 * `HUE_SCENE_GROUPID`
 This is the lighting group ID for the the scenes - note that the scenes used should all be part of the same group of lights for this to work.
 
