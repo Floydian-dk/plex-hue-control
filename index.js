@@ -79,10 +79,10 @@ app.post('/', upload.single('thumb'), function (req, res, next) {
                     console.log("media stop");
                     break;
             }
-        else: // We have movie or episode
+        default: // We have movie or episode
             switch (payload.event) {
                 case 'media.play':
-                    setScene(huescenegroupid, huesceneplay 250); // Delay in 1/10s
+                    setScene(huescenegroupid, huesceneplay, 250); // Delay in 1/10s
                     console.log("Play event");
                     break;
                 case 'media.pause':
