@@ -10,6 +10,7 @@ Instead of having hardcoded parameters, his code has been ammended to use .env v
 * v1.1.1: Fixing missing packages
 * v1.2.0: Adding setting for trailershow before movies.
 * v1.2.2: More details in logging
+* v1.2.3: This is a security fix only. Updating modules, node version etc. No new features implemented. Solves CVE-2024-45296 issue.
 
 ## Deployment
 
@@ -24,10 +25,10 @@ $ brew install node
 ### Verify that Node.js is installed and working
 ```bash
 $ node -v
-v18.9.1
+v22.11.0
 
 $ npm -v
-8.19.1
+10.9.0
 ```
 
 ### Install PM2 - the Node.js process manager

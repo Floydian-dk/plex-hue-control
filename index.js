@@ -3,7 +3,7 @@ const NightTimeCalc = require('./sun-calc')
 
 // requried libraries
 const express = require('express')
-    , request = require('request')
+    , request = require('@cypress/request')
     , multer = require('multer')
     , axios = require('axios');
 
